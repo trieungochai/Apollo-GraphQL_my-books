@@ -12,8 +12,24 @@ const resolvers = {
         genre: "Travelogue",
       },
     ],
+    authors: () => [
+      {
+        id: 1,
+        name: "Aldous Huxley",
+        born: 1894,
+      },
+      {
+        id: 2,
+        name: "Yasunari Kawabata",
+        born: 1899,
+      },
+      {
+        id: 3,
+        name: "Vladimir Vladimirovich Nabokov",
+        born: 1899,
+      },
+    ],
   },
 };
 
 module.exports = resolvers;
-
