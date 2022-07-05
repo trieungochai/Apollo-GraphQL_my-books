@@ -11,7 +11,7 @@ const authors = [
   },
   {
     id: 3,
-    name: "Vladimir Vladimirovich Nabokov",
+    name: "Vladimir Nabokov",
     born: 1899,
   },
   {

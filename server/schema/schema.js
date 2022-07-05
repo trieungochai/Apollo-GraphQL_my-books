@@ -13,6 +13,7 @@ const typeDefs = gql`
     id: ID!
     title: String!
     genre: String!
+    author: Author!
   }
 
   type Author {
