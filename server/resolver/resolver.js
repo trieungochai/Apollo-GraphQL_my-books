@@ -2,6 +2,7 @@ const { books } = require("../data/books/books.model");
 const { authors } = require("../data/authors/authors.model");
 
 const resolvers = {
+  // QUERY
   Query: {
     books: () => books,
     book: (parent, args) => books.find((book) => book.id == args.id),
@@ -16,6 +17,11 @@ const resolvers = {
 
   Author: {
     books: (parent, args) => books.filter((book) => book.authorId == parent.id),
+  },
+
+  // MUTATION
+  Mutation: {
+    createAuthor: (parent, args) => args,
   },
 };
 
