@@ -21,6 +21,7 @@ const resolvers = {
 
   // MUTATION
   Mutation: {
+    createBook: (parent, args) => args,
     createAuthor: (parent, args) => args,
   },
 };

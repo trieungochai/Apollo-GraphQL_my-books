@@ -11,6 +11,7 @@ const typeDefs = gql`
 
   # ROOT TYPE
   type Mutation {
+    createBook(id: ID!, title: String!, genre: String!, authorId: ID!): Book
     createAuthor(id: ID!, name: String!, born: Int!): Author
   }
 
