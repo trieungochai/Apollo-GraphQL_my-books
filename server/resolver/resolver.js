@@ -8,7 +8,8 @@ const resolvers = {
   Query: {
     books: async (parent, args, { mongoDataMethods }) =>
       await mongoDataMethods.getAllBooks(),
-    book: (parent, args) => books.find((book) => book.id == args.id),
+    book: async (parent, { id }, { mongoDataMethods }) =>
+      await mongoDataMethods.getBookById(id),
     authors: () => authors,
     author: (parent, args) => authors.find((author) => author.id == args.id),
   },
