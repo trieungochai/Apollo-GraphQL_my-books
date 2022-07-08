@@ -1,13 +1,14 @@
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const mongoose = require("mongoose");
-
 const app = express();
-const PORT = process.env.PORT || 4000;
 
 // Load schema & resolvers
 const typeDefs = require("./schema/schema");
 const resolvers = require("./resolver/resolver");
+
+// Load db methods
+const mongoDataMethods = require("./data/db");
 
 // Connect to MongoDB
 const uri =
@@ -28,10 +29,15 @@ const connectDB = async () => {
 
 connectDB();
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: () => ({ mongoDataMethods }),
+});
 
 server.applyMiddleware({ app });
 
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server ready at http://localhost:${PORT}${server.graphqlPath}`);
 });
