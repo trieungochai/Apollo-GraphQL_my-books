@@ -24,14 +24,10 @@ const resolvers = {
 
   // MUTATION
   Mutation: {
-    createBook: async (parent, args) => {
-      const newBook = new Book(args);
-      return await newBook.save();
-    },
-    createAuthor: async (parent, args) => {
-      const newAuthor = new Author(args);
-      return await newAuthor.save();
-    },
+    createBook: async (parent, args, { mongoDataMethods }) =>
+      await mongoDataMethods.createBook(args),
+    createAuthor: async (parent, args, { mongoDataMethods }) =>
+      await mongoDataMethods.createAuthor(args),
   },
 };
 
