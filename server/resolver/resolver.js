@@ -6,9 +6,8 @@ const Author = require("../models/authors.model");
 const resolvers = {
   // QUERY
   Query: {
-    books: async (parent, args, context) => {
-      return await context.mongoDataMethods.getAllBooks();
-    },
+    books: async (parent, args, { mongoDataMethods }) =>
+      await mongoDataMethods.getAllBooks(),
     book: (parent, args) => books.find((book) => book.id == args.id),
     authors: () => authors,
     author: (parent, args) => authors.find((author) => author.id == args.id),
