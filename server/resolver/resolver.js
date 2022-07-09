@@ -1,8 +1,3 @@
-const { books } = require("../data/books/books.model");
-const { authors } = require("../data/authors/authors.model");
-const Book = require("../models/books.model");
-const Author = require("../models/authors.model");
-
 const resolvers = {
   // QUERY
   Query: {
@@ -10,8 +5,10 @@ const resolvers = {
       await mongoDataMethods.getAllBooks(),
     book: async (parent, { id }, { mongoDataMethods }) =>
       await mongoDataMethods.getBookById(id),
-    authors: () => authors,
-    author: (parent, args) => authors.find((author) => author.id == args.id),
+    authors: async (parent, args, { mongoDataMethods }) =>
+      await mongoDataMethods.getAllAuthors(),
+    author: async (parent, { id }, { mongoDataMethods }) =>
+      await mongoDataMethods.getAuthorById(id),
   },
 
   Book: {
