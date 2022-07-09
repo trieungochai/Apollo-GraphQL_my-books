@@ -7,16 +7,14 @@ const BookDetails = () => {
       <Card.Body>
         <Card.Title>Cowboy Bebop</Card.Title>
         <Card.Subtitle>Cowboy Bebop</Card.Subtitle>
-        <Card.Text>
-          <p>Cowboy Bebop</p>
-          <p>Cowboy Bebop</p>
-          <p>All books by this author:</p>
-          <ul>
-            <li>Cowboy Bebop</li>
-            <li>Cowboy Bebop</li>
-            <li>Cowboy Bebop</li>
-          </ul>
-        </Card.Text>
+        <p>Cowboy Bebop</p>
+        <p>Cowboy Bebop</p>
+        <p>All books by this author:</p>
+        <ul>
+          <li>Cowboy Bebop</li>
+          <li>Cowboy Bebop</li>
+          <li>Cowboy Bebop</li>
+        </ul>
       </Card.Body>
     </Card>
   );
