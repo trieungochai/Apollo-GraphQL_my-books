@@ -17,7 +17,8 @@ const resolvers = {
   },
 
   Author: {
-    books: (parent, args) => books.filter((book) => book.authorId == parent.id),
+    books: async ({ id }, args, { mongoDataMethods }) =>
+      await mongoDataMethods.getAllBooks({ authorId: id }),
   },
 
   // MUTATION
