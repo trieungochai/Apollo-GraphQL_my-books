@@ -12,8 +12,8 @@ const resolvers = {
   },
 
   Book: {
-    author: (parent, args) =>
-      authors.find((author) => author.id == parent.authorId),
+    author: async ({ authorId }, args, { mongoDataMethods }) =>
+      await mongoDataMethods.getAuthorById(authorId),
   },
 
   Author: {
