@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import BookDetails from "./BookDetails";
 
@@ -6,6 +6,8 @@ import { useQuery } from "@apollo/client";
 import { getAllBooks } from "../graphql-client/queries";
 
 const BookList = () => {
+  const [bookSelected, setBookSelected] = useState(null);
+
   const { loading, error, data } = useQuery(getAllBooks);
   if (loading) {
     return <p>Loading books...</p>;
@@ -14,7 +16,7 @@ const BookList = () => {
     return <p>Error loading books!</p>;
   }
 
-  console.log("🚀 ~ file: BookList.js ~ line 10 ~ BookList ~ data", data.books);
+  // console.log("🚀 ~ file: BookList.js ~ line 10 ~ BookList ~ data", data.books);
 
   return (
     <Row>
@@ -27,6 +29,7 @@ const BookList = () => {
               text="info"
               className="text-center shadow"
               key={book.id}
+              onClick={setBookSelected.bind(this, book.id)}
             >
               <Card.Body>{book.title}</Card.Body>
             </Card>
@@ -34,7 +37,7 @@ const BookList = () => {
         </Row>
       </Col>
       <Col>
-        <BookDetails />
+        <BookDetails bookId={bookSelected} />
       </Col>
     </Row>
   );
