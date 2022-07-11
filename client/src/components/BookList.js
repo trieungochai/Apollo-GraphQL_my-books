@@ -16,8 +16,6 @@ const BookList = () => {
     return <p>Error loading books!</p>;
   }
 
-  // console.log("🚀 ~ file: BookList.js ~ line 10 ~ BookList ~ data", data.books);
-
   return (
     <Row>
       <Col xs={8}>

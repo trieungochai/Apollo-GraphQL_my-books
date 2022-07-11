@@ -11,7 +11,7 @@ const getAllBooks = gql`
 `;
 
 const getSingleBook = gql`
-  query getSingleBookQuery($id: ID) {
+  query getSingleBookQuery($id: ID!) {
     book(id: $id) {
       id
       title

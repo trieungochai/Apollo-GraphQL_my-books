@@ -9,16 +9,17 @@ const BookDetails = ({ bookId }) => {
     variables: {
       id: bookId,
     },
+    skip: bookId === null,
   });
   if (loading) {
     return <p>Loading book details...</p>;
   }
-  if (bookId !== null && error) {
+  if (error) {
+    console.log(error.message);
     return <p>Error loading book details!</p>;
   }
-  console.log("🚀 ~ file: BookDetails.js ~ line 9 ~ BookDetails ~ data", data);
 
-  const book = !loading && !error ? data.book : null;
+  const book = bookId !== null ? data.book : null;
 
   return (
     <Card bg="info" text="white" className="shadow">
