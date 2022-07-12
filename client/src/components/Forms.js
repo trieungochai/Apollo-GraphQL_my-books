@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { getAllAuthors } from "../graphql-client/queries";
+import { addSingleBook } from "../graphql-client/mutations";
 
 const Forms = () => {
   const [newBook, setNewBook] = useState({
@@ -10,6 +11,8 @@ const Forms = () => {
     genre: "",
     authorId: "",
   });
+
+  const { title, genre, authorId } = newBook;
 
   const onInputChange = (event) => {
     setNewBook({
@@ -21,13 +24,29 @@ const Forms = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     console.log(newBook);
+    addBook({
+      title,
+      genre,
+      authorId,
+    });
+
+    // Clear form inputs after submission
+    setNewBook({ title: "", genre: "", authorId: "" });
   };
 
+  // GraphQL operations
   const { loading, error, data } = useQuery(getAllAuthors);
+  const { addBook, dataMutation } = useMutation(addSingleBook);
   if (error) {
     console.log(error.message);
     return <p>Error loading authors!</p>;
   }
+
+  console.log(
+    "🚀 ~ file: Forms.js ~ line 35 ~ Forms ~ dataMutation",
+    dataMutation
+  );
+  console.log("🚀 ~ file: Forms.js ~ line 35 ~ Forms ~ addBook", addBook);
 
   return (
     <Row>
@@ -39,7 +58,7 @@ const Forms = () => {
               placeholder="Book title"
               name="title"
               onChange={onInputChange}
-              value={newBook.title}
+              value={title}
             />
           </Form.Group>
           <Form.Group>
@@ -48,7 +67,7 @@ const Forms = () => {
               placeholder="Book genre"
               name="genre"
               onChange={onInputChange}
-              value={newBook.genre}
+              value={genre}
             />
           </Form.Group>
           <Form.Group>
@@ -59,7 +78,7 @@ const Forms = () => {
                 as="select"
                 name="authorId"
                 onChange={onInputChange}
-                value={newBook.authorId}
+                value={authorId}
               >
                 <option value="" disabled>
                   Select author
